@@ -92,25 +92,25 @@ def demo(net, image_name, classes, savefile):
     # Visualize detections for each class
     CONF_THRESH = 0.8
     NMS_THRESH = 0.3
-    for cls in classes:
-        cls_ind = 15 # CLASSES.index(cls)
-        cls_boxes = boxes[:, 4*cls_ind:4*(cls_ind + 1)]
-        cls_scores = scores[:, cls_ind]
-        dets = np.hstack((cls_boxes,
-                          cls_scores[:, np.newaxis])).astype(np.float32)
-        keep = nms(dets, NMS_THRESH)
-        dets = dets[keep, :]
-        inds = np.where(dets[:, -1] >= CONF_THRESH)[0]
-        for i in inds:
-            bbox = dets[i, :4]
-            score = dets[i, -1]
-            fid.write('{0:.3f}'.format(score))
-            for j in range(4):
-                fid.write(' ')
-                fid.write('{0:.3f}'.format(bbox[j]))
-            fid.write('\n')
+    cls = 'person'
+    cls_ind = 15 # CLASSES.index(cls)
+    cls_boxes = boxes[:, 4*cls_ind:4*(cls_ind + 1)]
+    cls_scores = scores[:, cls_ind]
+    dets = np.hstack((cls_boxes,
+                      cls_scores[:, np.newaxis])).astype(np.float32)
+    keep = nms(dets, NMS_THRESH)
+    dets = dets[keep, :]
+    inds = np.where(dets[:, -1] >= CONF_THRESH)[0]
+    for i in inds:
+        bbox = dets[i, :4]
+        score = dets[i, -1]
+        fid.write('{0:.3f}'.format(score))
+        for j in range(4):
+            fid.write(' ')
+            fid.write('{0:.3f}'.format(bbox[j]))
+        fid.write('\n')
 
-        vis_detections(im, cls, dets, thresh=CONF_THRESH)
+    vis_detections(im, cls, dets, thresh=CONF_THRESH)
 
     fid.close()
     
