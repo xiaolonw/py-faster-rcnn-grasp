@@ -36,6 +36,8 @@ NETS = {'vgg16': ('VGG16',
         'zf': ('ZF',
                   'ZF_faster_rcnn_final.caffemodel')}
 
+detclass = ('person')
+
 
 def vis_detections(im, class_name, dets, thresh=0.5):
     """Draw detected bounding boxes."""
@@ -69,7 +71,7 @@ def vis_detections(im, class_name, dets, thresh=0.5):
     plt.tight_layout()
     plt.draw()
 
-def demo(net, image_name):
+def demo(net, image_name, classes, savefile):
     """Detect object classes in an image using pre-computed object proposals."""
 
     # Load the demo image
@@ -84,18 +86,35 @@ def demo(net, image_name):
     print ('Detection took {:.3f}s for '
            '{:d} object proposals').format(timer.total_time, boxes.shape[0])
 
+    fid = open(savefile,'w')
+
+
     # Visualize detections for each class
     CONF_THRESH = 0.8
     NMS_THRESH = 0.3
-    for cls_ind, cls in enumerate(CLASSES[1:]):
-        cls_ind += 1 # because we skipped background
+    for cls in classes:
+        cls_ind = CLASSES.index(cls)
         cls_boxes = boxes[:, 4*cls_ind:4*(cls_ind + 1)]
         cls_scores = scores[:, cls_ind]
         dets = np.hstack((cls_boxes,
                           cls_scores[:, np.newaxis])).astype(np.float32)
         keep = nms(dets, NMS_THRESH)
         dets = dets[keep, :]
+        inds = np.where(dets[:, -1] >= CONF_THRESH)[0]
+        for i in inds:
+            bbox = dets[i, :4]
+            score = dets[i, -1]
+            fid.write('{0:.3f}'.format(score))
+            for j in range(4):
+                fid.write(' ')
+                fid.write('{0:.3f}'.format(bbox[j]))
+            fid.write('\n')
+
         vis_detections(im, cls, dets, thresh=CONF_THRESH)
+
+    fid.close()
+    
+
 
 def parse_args():
     """Parse input arguments."""
@@ -141,10 +160,32 @@ if __name__ == '__main__':
     for i in xrange(2):
         _, _= im_detect(net, im)
 
-    im_names = ['/nfs/ladoga_no_backups/users/xiaolonw/affordance_TBBT/frames_prune/S02/E0005.mkv/00001297/0015493.jpg']
-    for im_name in im_names:
-        print '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~'
-        print 'Demo for data/demo/{}'.format(im_name)
-        demo(net, im_name)
+    detlist = '/nfs/ladoga_no_backups/users/xiaolonw/affordance_TBBT/detlist.txt' 
+    jpgdir  = '/nfs/ladoga_no_backups/users/xiaolonw/affordance_TBBT/frames_prune/'
+    savedir = '/nfs/ladoga_no_backups/users/xiaolonw/affordance_TBBT/det_result_txt/'
+    samplefolder = 'S01/E0001.mkv/00000007/'
+    samplelen = len(samplefolder)
+
+    with open(detlist) as f:
+        im_names = [x.strip() for x in f.readlines()]
+    listlen = len(im_names)
+
+
+    for idx in range(10): # range(listlen):
+        im_name = im_names[idx]
+        im_folder = im_name[0:samplelen] 
+        im_folder = savedir + '/' + im_folder + '/'
+        if os.path.isdir(im_folder) == False:
+            os.makedirs(im_folder)
+        txt_name = im_name.replace('.jpg', '.txt')
+        savefile = savedir + txt_name 
+        im_name2 = jpgdir + im_name 
+        # print '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~'
+        # print 'Demo for data/demo/{}'.format(im_name)
+        demo(net, im_name2, detclass, savefile)
+
 
     plt.show()
+
+
+
