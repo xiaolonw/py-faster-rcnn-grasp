@@ -171,7 +171,7 @@ if __name__ == '__main__':
     listlen = len(im_names)
 
 
-    for idx in range(2): # range(listlen):
+    for idx in range(4): # range(listlen):
         im_name = im_names[idx]
         im_folder = im_name[0:samplelen] 
         im_folder = savedir + '/' + im_folder + '/'
