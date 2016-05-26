@@ -170,7 +170,7 @@ if __name__ == '__main__':
     listlen = len(im_names)
 
 
-    for idx in range(4): # range(listlen):
+    for idx in range(listlen): # range(listlen):
         if idx % 100 == 0:
             print(idx)
         im_name = im_names[idx]
