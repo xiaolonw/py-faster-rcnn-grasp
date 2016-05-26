@@ -110,7 +110,7 @@ def demo(net, image_name, classes, savefile):
             fid.write('{0:.3f}'.format(bbox[j]))
         fid.write('\n')
 
-    vis_detections(im, cls, dets, thresh=CONF_THRESH)
+    # vis_detections(im, cls, dets, thresh=CONF_THRESH)
 
     fid.close()
     
@@ -185,7 +185,7 @@ if __name__ == '__main__':
         demo(net, im_name2, detclass, savefile)
 
 
-    plt.show()
+    # plt.show()
 
 
 
