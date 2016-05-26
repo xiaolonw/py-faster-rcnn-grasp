@@ -83,8 +83,7 @@ def demo(net, image_name, classes, savefile):
     timer.tic()
     scores, boxes = im_detect(net, im)
     timer.toc()
-    print ('Detection took {:.3f}s for '
-           '{:d} object proposals').format(timer.total_time, boxes.shape[0])
+    #print ('Detection took {:.3f}s for ''{:d} object proposals').format(timer.total_time, boxes.shape[0])
 
     fid = open(savefile,'w')
 
@@ -172,6 +171,8 @@ if __name__ == '__main__':
 
 
     for idx in range(4): # range(listlen):
+        if idx % 100 == 0:
+            print(idx)
         im_name = im_names[idx]
         im_folder = im_name[0:samplelen] 
         im_folder = savedir + '/' + im_folder + '/'
