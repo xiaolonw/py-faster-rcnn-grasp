@@ -93,7 +93,7 @@ def demo(net, image_name, classes, savefile):
     CONF_THRESH = 0.8
     NMS_THRESH = 0.3
     for cls in classes:
-        cls_ind = CLASSES.index(cls)
+        cls_ind = 15 # CLASSES.index(cls)
         cls_boxes = boxes[:, 4*cls_ind:4*(cls_ind + 1)]
         cls_scores = scores[:, cls_ind]
         dets = np.hstack((cls_boxes,
