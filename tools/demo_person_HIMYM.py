@@ -159,10 +159,18 @@ if __name__ == '__main__':
     for i in xrange(2):
         _, _= im_detect(net, im)
 
-    detlist = '/nfs/ladoga_no_backups/users/xiaolonw/affordance/detlist.txt' 
-    jpgdir  = '/nfs/ladoga_no_backups/users/xiaolonw/affordance/frames_prune/'
-    savedir = '/nfs/ladoga_no_backups/users/xiaolonw/affordance/det_result_txt/'
-    samplefolder = './S01/E0001.mkv/00000007/'
+    # detection on HIMYM trajectories
+    # detlist = '/nfs/ladoga_no_backups/users/xiaolonw/affordance/detlist.txt' 
+    # jpgdir  = '/nfs/ladoga_no_backups/users/xiaolonw/affordance/frames_prune/'
+    # savedir = '/nfs/ladoga_no_backups/users/xiaolonw/affordance/det_result_txt/'
+    # samplefolder = './S01/E0001.mkv/00000007/'
+
+    # detection on HIMYM matches
+    detlist = '/nfs/ladoga_no_backups/users/xiaolonw/affordance/matches/002_HIMYMData_clust50.h5.imlist' 
+    jpgdir  = '/nfs/ladoga_no_backups/users/xiaolonw/affordance/matches/cpframes/'
+    savedir = '/nfs/ladoga_no_backups/users/xiaolonw/affordance/matches/det_result_txt/'
+    samplefolder = './S02/E0019.mkv/'
+
     samplelen = len(samplefolder)
 
     with open(detlist) as f:
