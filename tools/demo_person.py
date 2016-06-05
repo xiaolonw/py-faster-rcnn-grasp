@@ -167,7 +167,7 @@ if __name__ == '__main__':
 
     # matches on TBBT
     detlist = '/nfs/ladoga_no_backups/users/xiaolonw/affordance_TBBT/matches/001_TBBTData.h5.imlist' 
-    jpgdir  = '/nfs/ladoga_no_backups/users/xiaolonw/affordance_TBBT/matches/cpframes'
+    jpgdir  = '/nfs/ladoga_no_backups/users/xiaolonw/affordance_TBBT/matches/cpframes/'
     savedir = '/nfs/ladoga_no_backups/users/xiaolonw/affordance_TBBT/matches/det_result_txt/'
     samplefolder = 'S01/E0001.mkv/'
 
