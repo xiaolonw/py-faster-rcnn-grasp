@@ -159,11 +159,18 @@ if __name__ == '__main__':
     for i in xrange(2):
         _, _= im_detect(net, im)
 
+
+    # trajectories on TBBT
+    detlist = '/nfs/ladoga_no_backups/users/xiaolonw/affordance_friends/detlist.txt' 
+    jpgdir  = '/nfs/ladoga_no_backups/users/xiaolonw/affordance_friends/frames_prune/'
+    savedir = '/nfs/ladoga_no_backups/users/xiaolonw/affordance_friends/det_result_txt/'
+    samplefolder = 'S01/E0001.mkv/00000007/'
+
     # matches on friends
-    detlist = '/nfs/ladoga_no_backups/users/xiaolonw/affordance_friends/matches/002_FriendsData_max10Match.h5.imlist' 
-    jpgdir  = '/nfs/ladoga_no_backups/users/xiaolonw/affordance_friends/matches/cpframes/'
-    savedir = '/nfs/ladoga_no_backups/users/xiaolonw/affordance_friends/matches/det_result_txt/'
-    samplefolder = 'S01/E0001.mkv/'
+    # detlist = '/nfs/ladoga_no_backups/users/xiaolonw/affordance_friends/matches/002_FriendsData_max10Match.h5.imlist' 
+    # jpgdir  = '/nfs/ladoga_no_backups/users/xiaolonw/affordance_friends/matches/cpframes/'
+    # savedir = '/nfs/ladoga_no_backups/users/xiaolonw/affordance_friends/matches/det_result_txt/'
+    # samplefolder = 'S01/E0001.mkv/'
 
     samplelen = len(samplefolder)
 
