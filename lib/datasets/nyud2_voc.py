@@ -71,7 +71,7 @@ class nyud2_voc(imdb):
         #     image_path.append(os.path.join(self._data_path, typ, index + self._image_ext))
         #     assert os.path.exists(image_path[-1]), 'Path does not exist: {}'.format(image_path)
 
-        image_path = os.path.join(self._data_path, typ, index + self._image_ext)
+        image_path = os.path.join(self._data_path, self._image_type, index + self._image_ext)
         assert os.path.exists(image_path), \
                 'Path does not exist: {}'.format(image_path)
 
