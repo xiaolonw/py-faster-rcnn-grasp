@@ -18,7 +18,7 @@ import numpy as np
 # Set up voc_<year>_<split> using selective search "fast" mode
 for year in ['2015']:
     for split in ['train', 'val', 'trainval', 'test']:
-        name = 'nyud2_images_{:s}_{:s}'.format(typ, year, split)
+        name = 'nyud2_images_{:s}_{:s}'.format( year, split)
         __sets[name] = (lambda split=split, year=year: nyud2_voc(split, year))
 
 
