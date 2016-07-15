@@ -17,6 +17,7 @@ import scipy.io as sio
 import utils.cython_bbox
 import cPickle
 import subprocess
+import uuid
 from IPython.core.debugger import Tracer
 
 class nyud2_voc(datasets.imdb):
