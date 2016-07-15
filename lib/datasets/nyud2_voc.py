@@ -9,7 +9,7 @@ import python_utils.general_utils as g_utils
 import datasets
 import datasets.nyud2_voc
 import os
-import datasets.imdb
+from datasets.imdb import imdb
 import xml.dom.minidom as minidom
 import numpy as np
 import scipy.sparse
@@ -20,9 +20,9 @@ import subprocess
 import uuid
 from IPython.core.debugger import Tracer
 
-class nyud2_voc(datasets.imdb):
+class nyud2_voc(imdb):
     def __init__(self, image_set, year, devkit_path=None):
-        datasets.imdb.__init__(self, 'nyud2_images_' + year + '_' + image_set)
+        imdb.__init__(self, 'nyud2_images_' + year + '_' + image_set)
         self._year = year
         self._devkit_path = self._get_default_path() if devkit_path is None \
                             else devkit_path
@@ -138,7 +138,7 @@ class nyud2_voc(datasets.imdb):
         if True:
             gt_roidb = self.gt_roidb()
             ss_roidb = self._load_mcg_roidb(gt_roidb)
-            roidb = datasets.imdb.merge_roidbs(gt_roidb, ss_roidb)
+            roidb = imdb.merge_roidbs(gt_roidb, ss_roidb)
         else:
             roidb = self._load_mcg_roidb(None)
         with open(cache_file, 'wb') as fid:
