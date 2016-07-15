@@ -21,8 +21,8 @@ import uuid
 from IPython.core.debugger import Tracer
 
 class nyud2_voc(datasets.imdb):
-    def __init__(self, image_set, year, devkit_path=None, image_type = 'images'):
-        datasets.imdb.__init__(self, 'nyud2_' + image_type + '_' + year + '_' + image_set)
+    def __init__(self, image_set, year, devkit_path=None):
+        datasets.imdb.__init__(self, 'nyud2_images_' + year + '_' + image_set)
         self._year = year
         self._devkit_path = self._get_default_path() if devkit_path is None \
                             else devkit_path
@@ -34,7 +34,7 @@ class nyud2_voc(datasets.imdb):
             'pillow', 'sink', 'sofa', 'table', 'television', 'toilet');
 
         self._class_to_ind = dict(zip(self.classes, xrange(self.num_classes)))
-        self._image_type = image_type;
+        self._image_type = 'images';
         self._image_set = image_set;
         self._image_ext = '.png'
         self._image_index = self._load_image_set_index()
