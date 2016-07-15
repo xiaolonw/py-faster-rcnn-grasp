@@ -10,8 +10,18 @@
 __sets = {}
 
 from datasets.pascal_voc import pascal_voc
+import datasets.nyud2_voc import nyud2_voc
 from datasets.coco import coco
 import numpy as np
+
+
+# Set up voc_<year>_<split> using selective search "fast" mode
+for year in ['2015']:
+    for split in ['train', 'val', 'trainval', 'test']:
+        for typ in ['images']:
+            name = 'nyud2_{:s}_{:s}_{:s}'.format(typ, year, split)
+            __sets[name] = (lambda split=split, year=year, typ=typ: nyud2_voc(split, year, image_type = typ))
+
 
 # Set up voc_<year>_<split> using selective search "fast" mode
 for year in ['2007', '2012']:
