@@ -25,6 +25,8 @@ class RoIDataLayer(caffe.Layer):
         if cfg.TRAIN.MORE_SAMPLES: 
             posperm = np.random.permutation(np.arange(cfg.TRAIN.POS_IMAGES)) 
             negperm = np.random.permutation(np.arange(len(self._roidb) - cfg.TRAIN.POS_IMAGES)) 
+            print('sample nums:')
+            print(len(self._roidb))
             negperm = negperm + cfg.TRAIN.POS_IMAGES
             self._perm = np.random.permutation(np.arange(cfg.TRAIN.SHUFFLE_BOUND)) 
             for i in range(cfg.TRAIN.POS_IMAGES): 

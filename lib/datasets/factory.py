@@ -11,6 +11,7 @@ __sets = {}
 
 from datasets.pascal_voc import pascal_voc
 from datasets.nyud2_voc import nyud2_voc
+from datasets.nyud3_voc import nyud3_voc
 from datasets.coco import coco
 import numpy as np
 
@@ -21,6 +22,10 @@ for year in ['2015']:
         name = 'nyud2_images_{:s}_{:s}'.format( year, split)
         __sets[name] = (lambda split=split, year=year: nyud2_voc(split, year))
 
+for year in ['2015']:
+    for split in [ 'trainval', 'test']:
+        name = 'nyud2_images_{:s}_{:s}'.format( year, split)
+        __sets[name] = (lambda split=split, year=year: nyud3_voc(split, year))
 
 # Set up voc_<year>_<split> using selective search "fast" mode
 for year in ['2007', '2012']:
