@@ -11,6 +11,7 @@ for i = 1 : numel(list)
 	readname = [srcdir '/' fname]; 
 	desname = sprintf('%s/img_%05d.png', desdir, num);
 	cmd = ['cp ' readname ' ' desname]; 
+	system(cmd);
 
 end
 
