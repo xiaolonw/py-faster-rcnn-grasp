@@ -10,7 +10,7 @@ for i = 1 : numel(list)
 	nowid = startid + i - 1;
 	fname = list(i).name; 
 	readname = [srcdir '/' fname]; 
-	desname  = [desdir '/' num2str(nowid) '.png'];  
+	desname  = [desdir '/img_' num2str(nowid) '.png'];  
 	im = imread(readname); 
 	im = imresize(im, [512, 512]); 
 	imwrite(im, desname); 
