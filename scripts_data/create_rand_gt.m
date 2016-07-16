@@ -15,10 +15,10 @@ rec.imgsize = [512 512];
 
 for i = startid : endid 
 	fname = [src 'img_' num2str(i) '.mat']; 
-	x1 = floor(rand() * 512);
-	y1 = floor(rand() * 512); 
-	w  = floor(rand() * 256); 
-	h  = floor(rand() * 256); 
+	x1 = floor(rand() * 400) + 1;
+	y1 = floor(rand() * 400) + 1; 
+	w  = floor(rand() * 256) + 1; 
+	h  = floor(rand() * 256) + 1; 
 	x2 = min([x1 + w, 512]);
 	y2 = min([y1 + h, 512]);
 
