@@ -124,6 +124,13 @@ __C.TRAIN.RPN_BBOX_INSIDE_WEIGHTS = (1.0, 1.0, 1.0, 1.0)
 __C.TRAIN.RPN_POSITIVE_WEIGHT = -1.0
 
 
+# wxl implementations 
+__C.TRAIN.MORE_SAMPLES = True
+__C.TRAIN.POS_IMAGES = 795
+__C.TRAIN.SHUFFLE_BOUND = 795 * 2
+
+
+
 #
 # Testing options
 #

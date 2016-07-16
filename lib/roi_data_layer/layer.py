@@ -22,7 +22,16 @@ class RoIDataLayer(caffe.Layer):
 
     def _shuffle_roidb_inds(self):
         """Randomly permute the training roidb."""
-        if cfg.TRAIN.ASPECT_GROUPING:
+        if cfg.TRAIN.MORE_SAMPLES: 
+            posperm = np.random.permutation(np.arange(cfg.TRAIN.POS_IMAGES)) 
+            negperm = np.random.permutation(np.arange(len(self._roidb) - cfg.TRAIN.POS_IMAGES)) 
+            negperm = negperm + cfg.TRAIN.POS_IMAGES
+            self._perm = np.random.permutation(np.arange(cfg.TRAIN.SHUFFLE_BOUND)) 
+            for i in range(cfg.TRAIN.POS_IMAGES): 
+                self._perm[i * 2] = posperm[i]
+                self._perm[i * 2 + 1] = negperm[i]
+
+        elif cfg.TRAIN.ASPECT_GROUPING:
             widths = np.array([r['width'] for r in self._roidb])
             heights = np.array([r['height'] for r in self._roidb])
             horz = (widths >= heights)
@@ -42,7 +51,7 @@ class RoIDataLayer(caffe.Layer):
 
     def _get_next_minibatch_inds(self):
         """Return the roidb indices for the next minibatch."""
-        if self._cur + cfg.TRAIN.IMS_PER_BATCH >= len(self._roidb):
+        if self._cur + cfg.TRAIN.IMS_PER_BATCH >= len(self._perm):  #self._roidb 
             self._shuffle_roidb_inds()
 
         db_inds = self._perm[self._cur:self._cur + cfg.TRAIN.IMS_PER_BATCH]
@@ -174,13 +183,23 @@ class BlobFetcher(Process):
     def _shuffle_roidb_inds(self):
         """Randomly permute the training roidb."""
         # TODO(rbg): remove duplicated code
-        self._perm = np.random.permutation(np.arange(len(self._roidb)))
+        if cfg.TRAIN.MORE_SAMPLES: 
+            posperm = np.random.permutation(np.arange(cfg.TRAIN.POS_IMAGES)) 
+            negperm = np.random.permutation(np.arange(len(self._roidb) - cfg.TRAIN.POS_IMAGES)) 
+            negperm = negperm + cfg.TRAIN.POS_IMAGES
+            self._perm = np.random.permutation(np.arange(cfg.TRAIN.SHUFFLE_BOUND)) 
+            for i in range(cfg.TRAIN.POS_IMAGES): 
+                self._perm[i * 2] = posperm[i]
+                self._perm[i * 2 + 1] = negperm[i]
+        else:
+            self._perm = np.random.permutation(np.arange(len(self._roidb)))
+
         self._cur = 0
 
     def _get_next_minibatch_inds(self):
         """Return the roidb indices for the next minibatch."""
         # TODO(rbg): remove duplicated code
-        if self._cur + cfg.TRAIN.IMS_PER_BATCH >= len(self._roidb):
+        if self._cur + cfg.TRAIN.IMS_PER_BATCH >= len(self._perm):  #self._roidb 
             self._shuffle_roidb_inds()
 
         db_inds = self._perm[self._cur:self._cur + cfg.TRAIN.IMS_PER_BATCH]
