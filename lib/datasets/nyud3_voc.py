@@ -88,7 +88,7 @@ class nyud3_voc(imdb):
         assert os.path.exists(image_set_file), \
                 'Path does not exist: {}'.format(image_set_file)
         raw_data = sio.loadmat(image_set_file)[self._image_set].ravel()
-        image_index = ['img_{:5d}'.format(i) for i in raw_data]
+        image_index = ['img_{:05d}'.format(i) for i in raw_data]
         
         return image_index
 
