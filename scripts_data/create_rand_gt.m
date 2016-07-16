@@ -1,10 +1,9 @@
 
-src = '/scratch/xiaolonw/nyud3/benchmarkData/gt_box_cache_dir2/'
+src = '/scratch/xiaolonw/nyud3/benchmarkData/gt_box_cache_dir/'
 
 startid = 10000;
 endid   = 29999;
 
-rec.imgsize = [512 512];
 rec.objects = [];
 obj.instanceId = 1;
 obj.difficult = 0;
@@ -12,6 +11,7 @@ obj.truncated = 0;
 obj.bbox = [];
 obj.class = '__background__'; 
 rec.objects = [rec.objects, obj]; 
+rec.imgsize = [512 512];
 
 for i = startid : endid 
 	fname = [src 'img_' num2str(i) '.mat']; 
