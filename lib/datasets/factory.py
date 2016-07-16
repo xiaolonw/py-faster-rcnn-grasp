@@ -24,7 +24,7 @@ for year in ['2015']:
 
 for year in ['2015']:
     for split in [ 'trainval', 'test']:
-        name = 'nyud2_images_{:s}_{:s}'.format( year, split)
+        name = 'nyud3_images_{:s}_{:s}'.format( year, split)
         __sets[name] = (lambda split=split, year=year: nyud3_voc(split, year))
 
 # Set up voc_<year>_<split> using selective search "fast" mode
