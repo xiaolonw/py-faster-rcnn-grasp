@@ -9,7 +9,7 @@ obj.instanceId = 1;
 obj.difficult = 0;
 obj.truncated = 0;
 obj.bbox = [];
-obj.class = '__background__'; 
+obj.class = 'hard_background'; 
 rec.objects = [rec.objects, obj]; 
 rec.imgsize = [512 512];
 

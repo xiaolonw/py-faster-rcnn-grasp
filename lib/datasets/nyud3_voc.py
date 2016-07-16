@@ -31,7 +31,7 @@ class nyud3_voc(imdb):
         self._classes = ('__background__', # always index 0
             'bathtub', 'bed', 'bookshelf', 'box', 'chair', 'counter', 'desk',
             'door', 'dresser', 'garbage-bin', 'lamp', 'monitor', 'night-stand',
-            'pillow', 'sink', 'sofa', 'table', 'television', 'toilet');
+            'pillow', 'sink', 'sofa', 'table', 'television', 'toilet', 'hard_background');
 
         self._class_to_ind = dict(zip(self.classes, xrange(self.num_classes)))
         self._image_type = 'images';
