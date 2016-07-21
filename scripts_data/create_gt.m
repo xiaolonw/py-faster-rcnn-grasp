@@ -55,7 +55,7 @@ for i = 1 : numel(names)
 		rec.objects = [rec.objects, obj];
 		obj.instanceId = cnt;
 		cnt = cnt + 1;
-		
+
 	end
 
 	fclose(fid2); 
@@ -70,9 +70,15 @@ for i = 1 : numel(names)
 end
 
 rp =  randperm(numel(outnames)); 
+trainval = {};
+test = {};
+for i = 1 : numel(rp) - 2000
+	trainval{end + 1} = outnames{rp(i)};
+end
+for i = numel(rp) - 2000 + 1 : numel(rp)
+	test{end + 1} = outnames{rp(i)};
+end
 
-trainval = outnames{rp(1 : end - 2000)}; 
-test = outnames{rp(end - 2000 + 1 : end)}; 
 
 
 save( splits , 'test' , 'trainval');
