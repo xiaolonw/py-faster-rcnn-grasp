@@ -52,8 +52,8 @@ for i = 1 : numel(names)
 		bbox = fscanf(fid2, '%d', 4); 
 		obj.bbox = [bbox(1), bbox(3), bbox(2), bbox(4)]; 
 		obj.class = num2str(cls); 
-		rec.objects = [rec.objects, obj];
 		obj.instanceId = cnt;
+		rec.objects = [rec.objects, obj];
 		cnt = cnt + 1;
 
 	end
