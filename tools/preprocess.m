@@ -11,6 +11,8 @@ for i = 1 : numel(list)
 	im = imread(imname);
 	height = round(size(im, 1) / 3);
 	width  = round(size(im, 2) / 3); 
-	im = imresize(im, [height, width]); 
+	if height > 2000 || width > 2000
+		im = imresize(im, [height, width]); 
+	end
 	imwrite(im, imname); 
 end
